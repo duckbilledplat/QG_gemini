@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Quote Generator</title>
+  <style>
+    /* Background image with blur */
+    .background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("{{ url_for('static', filename='images/1.jpg') }}") no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(6px);
+      z-index: -1;
+    }
+
+    /* Foreground content */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      color: #fff;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+      font-size: 4rem; 
+    }
+    h3 {
+    font-size: 1.5rem; /* Subheadline */
+    }
+
+    form input, form button {
+    font-size: 1rem; /* Normal text size */
+    }
+
+    form {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    input[type="text"] {
+        padding: 10px 15px;
+        font-size: 1rem;
+        border: 2px solid #93b3d8;
+        border-radius: 8px;
+        flex-grow: 1;
+        min-width: 200px;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        background-color: #245eaa;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #1b399a;
+    }
+    
+    h3, blockquote {
+        color: #fff;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    }
+    
+    blockquote {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-left: 5px solid #4770bc;
+        padding: 15px 20px;
+        margin: 15px auto;
+        max-width: 600px;
+        border-radius: 8px;
+        color: #141c8c;
+        text-shadow: none;
+        font-size: 1.2rem; /* Slightly larger quote */
+    }
+  </style>
+</head>
+<body>
+  <!-- Blurred background image -->
+  <div class="background"></div>
+
+  <h1>How are you feeling today?</h1>
+  <form method="POST">
+    <input type="text" name="feeling" placeholder="e.g., happy, anxious" required>
+    <button type="submit">Get Quote</button>
+  </form>
+
+  {% if quote %}
+    <h3>✨ Here's your quote:</h3>
+    <blockquote>{{ quote }}</blockquote>
+  {% endif %}
+</body>
+</html>
